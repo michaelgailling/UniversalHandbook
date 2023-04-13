@@ -7,10 +7,11 @@ openai.api_key = open_ai_key
 
 class Neuron:
     def __init__(self, system_prompt):
-        system_prompt = system_prompt
+        # History acts as a state holder
         self.history = [{"role": "system", "content": system_prompt}]
 
     def add_context_prompt(self, context_message: str):
+        # The context prompt is like dendrites accepting input
         self.history.append({"role": "user", "content": context_message})
 
     def think(self):
@@ -22,4 +23,5 @@ class Neuron:
         self.history.append(resp["choices"][0]["message"])
 
     def __call__(self):
-        pass
+        # Calling behaves like an axon producing the current output state of the neuron
+        return self.history[-1]
