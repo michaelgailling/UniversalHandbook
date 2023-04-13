@@ -92,6 +92,9 @@ while True:
 
     lower_inp = usr_inp.lower()
 
+    if lower_inp in exit_commands:
+        exit()
+
     if not usr_inp:
         print("Empty prompts are skipped.")
 
