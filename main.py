@@ -34,7 +34,6 @@ ONLY OUTPUT JSON
 '''
 
 
-
 def make_initial_req(message: str):
     history = [{"role": "system", "content": sp_list},
                {"role": "user", "content": message}]
@@ -84,7 +83,6 @@ def make_detail_req(objective: str, step_n: str, step_d: str):
     return resp["choices"][0]["message"]["content"]
 
 
-
 resp_dict = {}
 
 while True:
@@ -122,8 +120,3 @@ for i in range(1, n):
     step_d = step[step_n]
 
     print(make_detail_req(objective=objective, step_n=step_n, step_d=step_d))
-
-
-
-
-
