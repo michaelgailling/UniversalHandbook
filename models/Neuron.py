@@ -23,5 +23,10 @@ class Neuron:
         self.history.append(resp["choices"][0]["message"])
 
     def __call__(self):
+
         # Calling behaves like an axon producing the current output state of the neuron
+        self.think()
+
+        # Activation logic goes here
         return self.history[-1]
+

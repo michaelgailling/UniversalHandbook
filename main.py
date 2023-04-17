@@ -42,6 +42,7 @@ def make_detail_req(objective: str, step_n: str, step_d: str):
     return resp["choices"][0]["message"]["content"]
 
 
+
 resp_dict = {}
 
 while True:
