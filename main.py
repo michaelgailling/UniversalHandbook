@@ -18,12 +18,15 @@ def make_initial_req(message: str):
     history = [{"role": "system", "content": sp_list},
                {"role": "user", "content": message}]
 
-    resp = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
-        messages=history
-    )
-
-    # print(resp)
+    while True:
+        try:
+            resp = openai.ChatCompletion.create(
+                model="gpt-3.5-turbo",
+                messages=history
+            )
+        except:
+            continue
+        break
 
     return resp["choices"][0]["message"]["content"]
 
@@ -33,14 +36,33 @@ def make_detail_req(objective: str, step_n: str, step_d: str):
 
     history = [{"role": "system", "content": sp_detail},
                {"role": "user", "content": prompt}]
-
-    resp = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
-        messages=history
-    )
+    while True:
+        try:
+            resp = openai.ChatCompletion.create(
+                model="gpt-3.5-turbo",
+                messages=history
+            )
+        except:
+            continue
+        break
 
     return resp["choices"][0]["message"]["content"]
 
+
+def get_summary_list(usr_inp: str):
+    resp_dict = {}
+    while True:
+        resp = make_initial_req(usr_inp)
+
+        print(resp)
+
+        try:
+            resp_dict = json.loads(resp)
+        except:
+            print("Something went wrong!")
+            continue
+        break
+    return resp_dict
 
 
 resp_dict = {}
@@ -55,16 +77,9 @@ while True:
 
     if not usr_inp:
         print("Empty prompts are skipped.")
-
-    resp = make_initial_req(usr_inp)
-
-    print(resp)
-
-    try:
-        resp_dict = json.loads(resp)
-    except:
-        print("Something went wrong!")
         continue
+
+    resp_dict = get_summary_list(usr_inp)
 
     break
 
