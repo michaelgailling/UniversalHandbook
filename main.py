@@ -18,6 +18,7 @@ exit_commands = [
 
 def input_to_list():
     while True:
+        print('Phrase your prompt like a "how to..." book, or a "...for dummies" book.')
         usr_inp = input("Prompt: ")
 
         lower_inp = usr_inp.lower()
@@ -104,17 +105,10 @@ def make_detail_req(objective: str, step_n: str, step_d: str):
     return resp["choices"][0]["message"]["content"]
 
 
+while True:
+    resp_dict = input_to_list()
 
-
-
-
-
-
-
-
-resp_dict = input_to_list()
-
-get_step_detail(resp_dict)
+    get_step_detail(resp_dict)
 
 
 
