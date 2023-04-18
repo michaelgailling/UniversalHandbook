@@ -71,7 +71,7 @@ def make_list_req(message: str):
     return resp["choices"][0]["message"]["content"]
 
 
-def get_step_detail(resp_dict: dict):
+def get_step_details(resp_dict: dict):
     objective = resp_dict["instructions"][0]
 
     for i in range(1, len(resp_dict["instructions"])):
@@ -107,7 +107,7 @@ def make_detail_req(objective: str, step_n: str, step_d: str):
 while True:
     resp_dict = input_to_list()
 
-    print(get_step_detail(resp_dict))
+    get_step_details(resp_dict)
 
 
 
