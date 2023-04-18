@@ -31,7 +31,6 @@ def input_to_list():
             continue
 
         resp_dict = get_summary_list(usr_inp)
-
         break
     return resp_dict
 
@@ -108,7 +107,7 @@ def make_detail_req(objective: str, step_n: str, step_d: str):
 while True:
     resp_dict = input_to_list()
 
-    get_step_detail(resp_dict)
+    print(get_step_detail(resp_dict))
 
 
 
