@@ -35,7 +35,7 @@ DO NOT DEVIATE FROM THE TEMPLATE
 "objective": "Restate objective here...",
 "step": "Step 1: Restate step here...",
 "details": "Detailed paragraph.Detailed paragraph.Detailed paragraph."
-}
+},
 DO NOT DEVIATE FROM THE TEMPLATE
 ONLY OUTPUT JSON
 '''

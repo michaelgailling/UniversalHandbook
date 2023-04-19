@@ -15,6 +15,17 @@ exit_commands = [
     "/kill"
 ]
 
+affirmative_words = [
+    "affirmative",
+    "sure",
+    "ok",
+    "yeah",
+    "yea",
+    "yes",
+    "ye",
+    "y"
+
+]
 
 def input_to_list():
     while True:
@@ -74,6 +85,8 @@ def make_list_req(message: str):
 def get_step_details(resp_dict: dict):
     objective = resp_dict["instructions"][0]
 
+    full_handbook = []
+
     for i in range(1, len(resp_dict["instructions"])):
         step: dict = resp_dict["instructions"][i]
 
@@ -81,7 +94,10 @@ def get_step_details(resp_dict: dict):
         step_n = step_n[0]
         step_d = step[step_n]
 
-        print(make_detail_req(objective=objective, step_n=step_n, step_d=step_d))
+        details = make_detail_req(objective=objective, step_n=step_n, step_d=step_d)
+        print(details)
+        full_handbook.append(details)
+    return full_handbook
 
 
 def make_detail_req(objective: str, step_n: str, step_d: str):
@@ -103,11 +119,49 @@ def make_detail_req(objective: str, step_n: str, step_d: str):
 
     return resp["choices"][0]["message"]["content"]
 
+def save_handbook(handbook: list):
+    while True:
+        usr_inp = input("Would you like to save this handbook?: ")
+
+        if not usr_inp:
+            print("Empty prompts are skipped.")
+            continue
+
+        lower_inp = usr_inp.lower()
+
+        if lower_inp in exit_commands:
+            exit()
+
+        if lower_inp in affirmative_words:
+            while True:
+                filename = input("Filename: ")
+                if filename:
+                    break
+                print("Invalid filename!")
+
+            write_file(handbook, filename)
+            break
+        else:
+            break
+
+
+def write_file(handbook: list, filename: str):
+    handbook_str = ""
+
+    for step in handbook:
+        handbook_str = f"{handbook_str}\n{step}"
+
+    with open(f"./handbooks/{filename}.txt", 'w') as f:
+        f.write(handbook_str)
 
 while True:
-    resp_dict = input_to_list()
+    list_of_steps = input_to_list()
 
-    get_step_details(resp_dict)
+    full_handbook = get_step_details(list_of_steps)
+
+    save_handbook(full_handbook)
+
+
 
 
 
