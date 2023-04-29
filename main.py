@@ -77,9 +77,7 @@ def make_list_req(message: str):
             print("OpenAI had a problem.")
             time.sleep(1)
             continue
-        break
-
-    return resp["choices"][0]["message"]["content"]
+        return resp["choices"][0]["message"]["content"]
 
 
 def get_step_details(resp_dict: dict):
@@ -115,9 +113,7 @@ def make_detail_req(objective: str, step_n: str, step_d: str):
             print("OpenAI had a problem.")
             time.sleep(1)
             continue
-        break
-
-    return resp["choices"][0]["message"]["content"]
+        return resp["choices"][0]["message"]["content"]
 
 def save_handbook(handbook: list):
     while True:
